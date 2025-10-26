@@ -12,7 +12,7 @@ export default function App() {
   const [filtroMes, setFiltroMes] = useState("");
 
   useEffect(() => {
-    fetch("http://localhost:3000/tasks")
+    fetch("https://lista-compras-psi-two.vercel.app/")
       .then((res) => res.json())
       .then((data) => setItens(data))
       .catch((err) => console.error(err));
