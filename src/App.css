@@ -2,18 +2,32 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    sans-serif;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
 }
 
 .app-container {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  height: 100vh;
+  width: 100vw;
   background-color: #f5f7fa;
+  margin: 0;
+  padding: 0;
 }
 
 .header {
-  background-color: #2e7d32; /* Darker, more sophisticated green */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #2e7d32;
   color: #fff;
   padding: 1.5rem;
   position: fixed;
@@ -21,7 +35,6 @@
   width: 100%;
   z-index: 10;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-
 }
 
 .header h2 {
@@ -32,7 +45,7 @@
 
 .filters {
   display: flex;
-  gap: 1rem;
+  gap: 0.5rem;
   margin-top: 1rem;
   flex-wrap: wrap;
 }
@@ -110,7 +123,8 @@ table {
   font-size: 0.9rem;
 }
 
-th, td {
+th,
+td {
   border: 1px solid #e0e0e0;
   padding: 0.75rem;
   text-align: center;
@@ -134,7 +148,7 @@ tbody tr:hover {
   position: fixed;
   bottom: 0;
   width: 100%;
-  background-color: #263238; /* Darker, elegant footer */
+  background-color: #263238; 
   color: #fff;
   padding: 1rem 1.5rem;
   display: flex;
@@ -169,34 +183,74 @@ button:active {
 
 .form button:hover,
 .footer button:hover {
-  background-color: #26632a; /* Slightly darker green on hover */
+  background-color: #26632a; 
 }
 
 .footer button {
-  background-color: #0288d1; /* Blue for export button to stand out */
+  background-color: #0288d1; 
 }
 
 .footer button:hover {
   background-color: #0277bd;
 }
 
-/* Responsive adjustments */
-@media (max-width: 600px) {
+
+@media (max-width: 1024px) {
   .header {
     padding: 1rem;
   }
 
   .header h2 {
-    font-size: 1.25rem;
+    font-size: 1.5rem;
   }
 
   .filters {
-    flex-direction: column;
+    flex-wrap: wrap;
     gap: 0.5rem;
   }
 
   .form {
     flex-direction: column;
+    gap: 0.5rem;
+    width: 90%;
+    margin: 0 auto;
+  }
+
+  .footer {
+    flex-direction: column;
+    padding: 1rem;
+    text-align: center;
+  }
+}
+
+
+@media (max-width: 600px) {
+  .header {
+    padding: 0.5rem;
+  }
+
+  .header h2 {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+  }
+
+ .filters {
+  display: flex;
+  flex-direction: row;    
+  flex-wrap: wrap;         
+  justify-content: center; 
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  margin: 1rem auto;
+}
+
+  .form {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.3rem;
+    width: 90%;
+    margin: 0 auto;
   }
 
   .form input,
@@ -206,6 +260,7 @@ button:active {
 
   .footer {
     flex-direction: column;
+    align-items: center;
     gap: 0.5rem;
     padding: 1rem;
   }
