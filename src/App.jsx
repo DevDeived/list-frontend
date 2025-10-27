@@ -79,7 +79,7 @@ export default function App() {
   // 🧾 Exportar PDF
   const exportarPDF = () => {
     const doc = new jsPDF();
-    doc.text("🛒 Lista de Compras", 14, 15);
+    doc.text(" Lista de Compras", 14, 15);
     doc.autoTable({
       startY: 25,
       head: [["Item", "Qtd", "Preço (R$)", "Subtotal (R$)"]],
