@@ -11,13 +11,20 @@ export default function App() {
   const [filtroNome, setFiltroNome] = useState("");
   const [filtroMes, setFiltroMes] = useState("");
 
+  // ✅ URL da API ajustada — funciona localmente e no Vercel
+  const API_URL =
+    import.meta.env.VITE_API_URL ||
+    "https://list-backend-git-main-devdeiveds-projects.vercel.app";
+
+  // 🔁 Buscar dados ao carregar
   useEffect(() => {
-    fetch("http://localhost:3000/tasks")
+    fetch(`${API_URL}/tasks`)
       .then((res) => res.json())
       .then((data) => setItens(data))
-      .catch((err) => console.error(err));
-  }, []);
+      .catch((err) => console.error("Erro ao buscar itens:", err));
+  }, [API_URL]);
 
+  // ➕ Adicionar item
   const adicionarItem = () => {
     if (!nome || quantidade <= 0 || preco <= 0) {
       alert("Preencha todos os campos corretamente!");
@@ -31,7 +38,7 @@ export default function App() {
       subtotal: Number(quantidade) * Number(preco),
     };
 
-    fetch("http://localhost:3000/tasks", {
+    fetch(`${API_URL}/tasks`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(novoItem),
@@ -43,15 +50,17 @@ export default function App() {
         setQuantidade("");
         setPreco("");
       })
-      .catch((err) => console.error(err));
+      .catch((err) => console.error("Erro ao adicionar item:", err));
   };
 
+  // ❌ Remover item
   const removerItem = (id) => {
-    fetch(`http://localhost:3000/tasks/${id}`, { method: "DELETE" })
+    fetch(`${API_URL}/tasks/${id}`, { method: "DELETE" })
       .then(() => setItens(itens.filter((item) => item.id !== id)))
-      .catch((err) => console.error(err));
+      .catch((err) => console.error("Erro ao remover item:", err));
   };
 
+  // 🔍 Filtro por nome e mês
   const itensFiltrados = itens.filter((item) => {
     const nomeMatch = item.nome
       .toLowerCase()
@@ -61,11 +70,13 @@ export default function App() {
     return nomeMatch && itemMes === Number(filtroMes);
   });
 
+  // 💰 Total
   const total = itensFiltrados.reduce(
     (acc, item) => acc + (item.subtotal || item.quantidade * item.preco),
     0
   );
 
+  // 🧾 Exportar PDF
   const exportarPDF = () => {
     const doc = new jsPDF();
     doc.text("🛒 Lista de Compras", 14, 15);
@@ -84,6 +95,7 @@ export default function App() {
     doc.save("lista_compras.pdf");
   };
 
+  // 📅 Meses
   const meses = [
     { value: "", label: "Todos os meses" },
     { value: "1", label: "Janeiro" },
@@ -103,7 +115,7 @@ export default function App() {
   return (
     <div className="app-container">
       <header className="header">
-        <h2> Lista de Compras</h2>
+        <h2>Lista de Compras</h2>
         <div className="filters">
           <input
             placeholder="Filtrar por nome"
