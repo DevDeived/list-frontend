@@ -11,10 +11,8 @@ export default function App() {
   const [filtroNome, setFiltroNome] = useState("");
   const [filtroMes, setFiltroMes] = useState("");
 
-  // ✅ URL da API ajustada — funciona localmente e no Vercel
-  const API_URL =
-    import.meta.env.VITE_API_URL ||
-    "https://list-backend-git-main-devdeiveds-projects.vercel.app";
+ const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
+
 
   // 🔁 Buscar dados ao carregar
   useEffect(() => {
