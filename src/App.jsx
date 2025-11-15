@@ -11,7 +11,7 @@ export default function App() {
   const [filtroNome, setFiltroNome] = useState("");
   const [filtroMes, setFiltroMes] = useState("");
 
- const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
+ const API_URL = import.meta.env.VITE_API_URL || "https://list-frontend-fa7q6tgaz-devdeiveds-projects.vercel.app/";
 
 
   // 🔁 Buscar dados ao carregar
